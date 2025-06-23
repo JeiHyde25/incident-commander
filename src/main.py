@@ -5,14 +5,19 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-SNOW_INSTANCE = os.getenv("SNOW_INSTANCE")
-SNOW_USER = os.getenv("SNOW_USER")
-SNOW_PASS = os.getenv("SNOW_PASS")
+
+def get_snow_credentials():
+    return (
+        os.getenv("SNOW_INSTANCE"),
+        os.getenv("SNOW_USER"),
+        os.getenv("SNOW_PASS"),
+    )
 
 
 def create_incident(short_desc: str, desc: str):
-    url = f"{SNOW_INSTANCE}/api/now/table/incident"
-    auth = (SNOW_USER, SNOW_PASS)
+    snow_instance, snow_user, snow_pass = get_snow_credentials()
+    url = f"{snow_instance}/api/now/table/incident"
+    auth = (snow_user, snow_pass)
 
     payload = {
         "short_description": short_desc,
