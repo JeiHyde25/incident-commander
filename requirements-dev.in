@@ -1,0 +1,5 @@
+# Developer dependencies for Incident Commander
+pip-tools
+pre-commit
+pytest
+black

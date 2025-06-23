@@ -1,0 +1,9 @@
+repos:
+  - repo: https://github.com/jazzband/pip-tools
+    rev: "7.4.1"
+    hooks:
+      - id: pip-compile
+        name: Recompile requirements.txt
+        args: ["requirements.in"]
+        additional_dependencies: ["pip-tools"]
+        language: python

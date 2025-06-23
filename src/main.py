@@ -4,9 +4,9 @@ import requests
 
 load_dotenv()
 
-SNOW_INSTANCE = os.getenv('SNOW_INSTANCE')
-SNOW_USER = os.getenv('SNOW_USER')
-SNOW_PASS = os.getenv('SNOW_PASS')
+SNOW_INSTANCE = os.getenv("SNOW_INSTANCE")
+SNOW_USER = os.getenv("SNOW_USER")
+SNOW_PASS = os.getenv("SNOW_PASS")
 
 
 def create_incident(short_desc: str, desc: str):
@@ -17,7 +17,7 @@ def create_incident(short_desc: str, desc: str):
         "short_description": short_desc,
         "description": desc,
         "urgency": "2",
-        "impact": "2"
+        "impact": "2",
     }
 
     headers = {
@@ -34,4 +34,6 @@ def create_incident(short_desc: str, desc: str):
 
 
 if __name__ == "__main__":
-    create_incident("Test incident", "This is a test from the Incident Commander script.")
+    create_incident(
+        "Test incident", "This is a test from the Incident Commander script."
+    )

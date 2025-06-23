@@ -1,9 +1,9 @@
 # 🚨 Incident Commander
 
 ![MIT License](https://img.shields.io/badge/License-MIT-yellow.svg)  
-![Made with Python](https://img.shields.io/badge/Made%20with-Python-blue)
+![Python](https://img.shields.io/badge/Made%20with-Python-blue)
 
-**Incident Commander** is a Python-based CLI tool that automates the creation of ServiceNow incidents. Designed for ITSM workflows, it enables engineers and support teams to log incidents quickly and securely through the command line — or integrate the tool into larger monitoring/alerting systems like Zabbix.
+A Python-based CLI tool that automates the creation of incidents in ServiceNow. This tool simulates real-world ITSM workflows by allowing users to trigger incident reports directly via the terminal. Designed to be extendable and suitable for integration with monitoring tools like Zabbix.
 
 ---
 
@@ -11,10 +11,12 @@
 
 ```
 incident-commander/
-├── main.py               # CLI entrypoint and incident creator
-├── .env.example          # Sample environment variable file
-├── incident_log.txt      # Local log file for tracking incidents
-├── requirements.txt      # Python dependencies
+├── src/
+│   └── main.py           # CLI entrypoint
+├── .env.example          # Environment variable example file
+├── incident_log.txt      # Runtime-generated log file
+├── requirements.txt      # Project dependencies
+├── setup-dev-env.sh      # Optional setup script
 ├── .gitignore            # Git ignored files
 └── README.md             # Project documentation
 ```
@@ -41,13 +43,60 @@ python main.py --short "Disk Alert" --desc "Disk usage exceeded 90% on prod-serv
 
 ---
 
-## 🧪 Installation
+## 🚀 Tech Stack
+
+- **Python 3.13**
+- **Requests**
+- **dotenv**
+- **argparse**
+- **ServiceNow REST API**
+- **GitHub**
+- **Azure DevOps (Pipelines)**
+
+---
+
+## 🛠️ Getting Started (Local)
+
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/JeiHyde25/incident-commander.git
 cd incident-commander
+```
+
+### 2. Install dependencies  
+# Requires Python 3.13+ and pip-tools
+```bash
+# First, install pip-tools (if not already installed)
+pip install pip-tools
+
+# Compile both runtime and dev requirements
+pip-compile requirements.in
+pip-compile requirements-dev.in
+
+# Install dependencies
 pip install -r requirements.txt
-cp .env.example .env  # then fill in your credentials
+pip install -r requirements-dev.txt
+
+# Alternatively, run:
+./setup-dev-env.sh
+
+### 3. Set up Git hooks (optional but recommended)
+```bash
+pre-commit install
+```
+
+### 3. Configure environment variables
+
+```bash
+cp .env.example .env
+# Then edit the `.env` file to include your ServiceNow instance URL, username, and password
+```
+
+### 4. Run the CLI tool
+
+```bash
+python main.py --short "Server Crash" --desc "App server down, needs urgent reboot."
 ```
 
 ---
