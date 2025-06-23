@@ -29,6 +29,7 @@ def create_incident(short_desc: str, desc: str):
         print("✅ Incident created:", response.json()["result"]["number"])
     else:
         print("❌ Failed:", response.status_code, response.text)
+        
 if __name__ == "__main__":
     create_incident(
         "Test incident", "This is a test from the Incident Commander script."
