@@ -1,0 +1,32 @@
+name: CI - Incident Commander
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@V5
+        with:
+          python-version: '3.13'
+
+      - name: Install runtime dependencies
+        run: pip install -r requirements.txt
+
+      - name: Install dev dependencies
+        run: pip install -r requirements-dev.txt
+
+      - name: Lint with black
+        run: black --check src/ tests/
+
+      - name: Run tests with pytest
+        run: PYTHONPATH=. pytest tests
