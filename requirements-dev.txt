@@ -22,6 +22,8 @@ identify==2.6.12
     # via pre-commit
 iniconfig==2.1.0
     # via pytest
+isort==6.0.1
+    # via -r requirements-dev.in
 mypy-extensions==1.1.0
     # via black
 nodeenv==1.9.1
