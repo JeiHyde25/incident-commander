@@ -1,5 +1,7 @@
 from unittest.mock import patch
 
+import pytest
+
 from src.main import create_incident
 
 
@@ -30,3 +32,31 @@ def test_create_incident_failure(mock_post):
     mock_post.return_value.text = "Unauthorized"
 
     create_incident("Fail Test", "Expecting failure")
+
+
+def test_create_incident_raises_type_error_if_description_is_not_string():
+    with pytest.raises(TypeError):
+        create_incident(123, "Expecting failure")
+    with pytest.raises(TypeError):
+        create_incident("Fail Test", 123)
+
+
+def test_create_incident_raises_value_error_if_description_is_empty():
+    with pytest.raises(ValueError):
+        create_incident("", "Expecting failure")
+    with pytest.raises(ValueError):
+        create_incident("Fail Test", "")
+
+
+def test_create_incident_raises_value_error_if_description_are_digits():
+    with pytest.raises(ValueError):
+        create_incident("123", "Expecting failure")
+    with pytest.raises(ValueError):
+        create_incident("Fail Test", "123")
+
+
+def test_create_incident_raises_value_error_if_description_contains_invalid_characters():
+    with pytest.raises(ValueError):
+        create_incident("ERROR!", "Expecting failure")
+    with pytest.raises(ValueError):
+        create_incident("Fail Test", "Test!")
